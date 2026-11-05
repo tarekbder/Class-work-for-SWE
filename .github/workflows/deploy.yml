@@ -1,29 +1,30 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Deploy
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [main]
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - uses: withastro/action@v3
         with:
           package-manager: npm
           node-version: 22
+          path: ./my-site
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{steps.deployment.outputs.page_url}}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-       -id: deployment 
-      uses: actions/deploy-pages@v4
+      - id: deployment
+        uses: actions/deploy-pages@v4
