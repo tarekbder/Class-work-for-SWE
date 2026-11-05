@@ -7,7 +7,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://tarekbder.github.io/Class-work-for-SWE/',
-	base: '/Class-work-for-SWE/",
+	base: "/Class-work-for-SWE/",
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
